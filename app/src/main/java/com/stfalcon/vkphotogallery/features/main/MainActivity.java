@@ -1,7 +1,9 @@
-package com.stfalcon.vkphotogallery;
+package com.stfalcon.vkphotogallery.features.main;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import com.stfalcon.vkphotogallery.R;
 
 public class MainActivity extends AppCompatActivity {
 
