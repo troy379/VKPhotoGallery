@@ -21,10 +21,10 @@ public class VkClient implements Interceptor {
     private Retrofit retrofit;
     private Object service;
 
-    public static VkClient instanse = new VkClient();
+    public static VkClient instance = new VkClient();
 
-    public static VkClient getInstanse() {
-        return instanse;
+    public static VkClient getInstance() {
+        return instance;
     }
 
     private VkClient() {
@@ -61,7 +61,7 @@ public class VkClient implements Interceptor {
 
     @SuppressWarnings("unchecked")
     public static <T> T makeService(Class<T> serviceClass) {
-        VkClient client = getInstanse();
+        VkClient client = getInstance();
         if (client.service == null || !serviceClass.isInstance(client.service)) {
             client.service = client.retrofit.create(serviceClass);
         }
