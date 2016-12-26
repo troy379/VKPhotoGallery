@@ -2,7 +2,9 @@ package com.stfalcon.vkphotogallery.features.profile;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.stfalcon.vkphotogallery.R;
 import com.stfalcon.vkphotogallery.features.profile.counters.CounterView;
+import com.stfalcon.vkphotogallery.features.profile.photos.PhotosPagerAdapter;
 
 /*
  * Created by troy379 on 19.12.16.
@@ -29,6 +32,9 @@ public class ProfileFragment extends Fragment {
     private TextView tvFullName;
     private TextView tvStatus;
 
+    private TabLayout tabLayout;
+    private ViewPager viewPager;
+
     public ProfileFragment() {
 
     }
@@ -37,17 +43,12 @@ public class ProfileFragment extends Fragment {
         return new ProfileFragment();
     }
 
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        View v = inflater.inflate(R.layout.fragment_profile, container);
+        View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
         toolbar = (Toolbar) v.findViewById(R.id.toolbar);
 
@@ -60,7 +61,13 @@ public class ProfileFragment extends Fragment {
         tvFullName = (TextView) v.findViewById(R.id.tvFullName);
         tvStatus = (TextView) v.findViewById(R.id.tvStatus);
 
-        return super.onCreateView(inflater, container, savedInstanceState);
+        tabLayout = (TabLayout) v.findViewById(R.id.tabLayout);
+        viewPager = (ViewPager) v.findViewById(R.id.viewPager);
+
+        viewPager.setAdapter(new PhotosPagerAdapter(getFragmentManager()));
+        tabLayout.setupWithViewPager(viewPager);
+
+        return v;
     }
 
     @Override

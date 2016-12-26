@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.stfalcon.vkphotogallery.Demo;
 import com.stfalcon.vkphotogallery.R;
 import com.stfalcon.vkphotogallery.common.model.Photo;
 
@@ -24,15 +25,22 @@ public class AllPhotosFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_photo_albums, container);
+        View v = inflater.inflate(R.layout.fragment_photo_albums, container, false);
 
         this.recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
+        initRecycler();
 
         return v;
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        onAlbumsLoaded(Demo.getPhotos());
+    }
+
     private void initRecycler() {
-        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 2));
+        recyclerView.setLayoutManager(new GridLayoutManager(getActivity(), 3));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         this.adapter = new AllPhotosAdapter();

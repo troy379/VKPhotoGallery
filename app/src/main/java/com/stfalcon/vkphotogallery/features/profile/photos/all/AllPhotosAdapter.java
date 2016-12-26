@@ -1,6 +1,7 @@
 package com.stfalcon.vkphotogallery.features.profile.photos.all;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -20,8 +21,8 @@ public class AllPhotosAdapter extends RecyclerView.Adapter<AllPhotosAdapter.Phot
 
     @Override
     public PhotoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new PhotoViewHolder(
-                View.inflate(parent.getContext(), R.layout.item_photo, parent));
+        return new PhotoViewHolder(LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_photo, parent, false));
     }
 
     @Override

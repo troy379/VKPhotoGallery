@@ -10,6 +10,10 @@ public class Photo {
     @SerializedName("thumb")
     private String thumb;
 
+    public Photo(String thumb) {
+        this.thumb = thumb;
+    }
+
     public String getThumb() {
         return thumb;
     }

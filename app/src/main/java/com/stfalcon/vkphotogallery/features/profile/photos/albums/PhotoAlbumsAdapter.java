@@ -1,6 +1,7 @@
 package com.stfalcon.vkphotogallery.features.profile.photos.albums;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -21,8 +22,8 @@ public class PhotoAlbumsAdapter
 
     @Override
     public AlbumViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new AlbumViewHolder(
-                View.inflate(parent.getContext(), R.layout.item_photo_album, parent));
+        return new AlbumViewHolder(LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_photo_album, parent, false));
     }
 
     @Override

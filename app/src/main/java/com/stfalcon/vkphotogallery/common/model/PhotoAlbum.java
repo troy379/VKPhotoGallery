@@ -10,6 +10,10 @@ public class PhotoAlbum {
     @SerializedName("thumb")
     private String thumb;
 
+    public PhotoAlbum(String thumb) {
+        this.thumb = thumb;
+    }
+
     public String getThumb() {
         return thumb;
     }
