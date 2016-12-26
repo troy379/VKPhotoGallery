@@ -45,19 +45,19 @@
                     android:layout_toRightOf="@+id/sdvAvatar"
                     android:orientation="horizontal">
 
-                    <com.stfalcon.vkphotogallery.features.profile.views.CounterView
+                    <com.stfalcon.vkphotogallery.features.profile.counters.CounterView
                         android:id="@+id/photosCounter"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"/>
 
-                    <com.stfalcon.vkphotogallery.features.profile.views.CounterView
+                    <com.stfalcon.vkphotogallery.features.profile.counters.CounterView
                         android:id="@+id/friendsCounter"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"/>
 
-                    <com.stfalcon.vkphotogallery.features.profile.views.CounterView
+                    <com.stfalcon.vkphotogallery.features.profile.counters.CounterView
                         android:id="@+id/followersCounter"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

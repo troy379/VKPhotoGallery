@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.stfalcon.vkphotogallery.R;
-import com.stfalcon.vkphotogallery.features.profile.views.CounterView;
+import com.stfalcon.vkphotogallery.features.profile.counters.CounterView;
 
 /*
  * Created by troy379 on 19.12.16.

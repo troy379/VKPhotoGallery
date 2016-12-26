@@ -1,4 +1,4 @@
-package com.stfalcon.vkphotogallery.features.profile.views;
+package com.stfalcon.vkphotogallery.features.profile.counters;
 
 import android.content.Context;
 import android.support.annotation.StringRes;
