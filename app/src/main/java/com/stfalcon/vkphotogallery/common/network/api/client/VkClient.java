@@ -1,6 +1,7 @@
 package com.stfalcon.vkphotogallery.common.network.api.client;
 
 import com.google.gson.Gson;
+import com.stfalcon.vkphotogallery.common.network.api.utils.EnumGsonConverterFactory;
 
 import java.io.IOException;
 
@@ -40,6 +41,7 @@ public class VkClient implements Interceptor {
                 .baseUrl(Config.BASE_URL)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(new Gson()))
+                .addConverterFactory(new EnumGsonConverterFactory())
                 .build();
     }
 
@@ -50,6 +52,7 @@ public class VkClient implements Interceptor {
 
         HttpUrl.Builder urlBuilder = originalUrl.newBuilder();
         urlBuilder.addQueryParameter("v", Config.VERSION);
+//        urlBuilder.addQueryParameter("access_token", Preferences.with()); // TODO: 11.01.17 add access token
 
         Request.Builder requestBuilder = original.newBuilder()
                 .url(urlBuilder.build());

@@ -13,8 +13,14 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.stfalcon.vkphotogallery.R;
+import com.stfalcon.vkphotogallery.common.model.user.User;
+import com.stfalcon.vkphotogallery.common.repo.Repo;
+import com.stfalcon.vkphotogallery.features.prefs.Preferences;
 import com.stfalcon.vkphotogallery.features.profile.counters.CounterView;
 import com.stfalcon.vkphotogallery.features.profile.photos.PhotosPagerAdapter;
+import com.stfalcon.vkphotogallery.features.profile.repo.IProfileRepo;
+import com.stfalcon.vkphotogallery.features.profile.repo.RetrofitProfileRepo;
+import com.stfalcon.vkphotogallery.utils.AppUtils;
 
 /*
  * Created by troy379 on 19.12.16.
@@ -34,6 +40,8 @@ public class ProfileFragment extends Fragment {
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
+
+    private IProfileRepo profileRepo = new RetrofitProfileRepo();
 
     public ProfileFragment() {
 
@@ -91,5 +99,27 @@ public class ProfileFragment extends Fragment {
 
         tvFullName.setText("Dave Taylor");
         tvStatus.setText("www.askdavetaylor.com/");
+
+        loadProfile();
+    }
+
+    private void loadProfile() {
+        profileRepo.getProfile(
+                Preferences.with(getActivity()).getUser(),
+                new Repo.Result<User>() {
+                    @Override
+                    public void response(User user) {
+                        onProfileLoaded(user);
+                    }
+                }, new Repo.Result<Throwable>() {
+                    @Override
+                    public void response(Throwable throwable) {
+
+                    }
+                });
+    }
+
+    private void onProfileLoaded(User user) {
+        tvFullName.setText(user.getFullName());
     }
 }
