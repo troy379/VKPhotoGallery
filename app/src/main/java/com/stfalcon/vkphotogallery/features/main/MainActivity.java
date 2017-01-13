@@ -26,10 +26,8 @@ public class MainActivity extends AppCompatActivity {
         if (Preferences.with(this).getAccessToken() == null
                 || Preferences.with(this).getUser() == 0) {
             AuthActivity.openForResult(this, REQUEST_CODE_AUTHORIZATION);
-        }
-
-        if (getBackStackCount() == 0) {
-            replaceFragment(ProfileFragment.newInstance());
+        } else {
+            setStartFragment();
         }
     }
 
@@ -37,11 +35,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
             case REQUEST_CODE_AUTHORIZATION:
-                if (resultCode != RESULT_OK)
-                    finish();
+                if (resultCode != RESULT_OK) finish();
                 break;
             default:
                 super.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (getBackStackCount() > 1) {
+            super.onBackPressed();
+        } else {
+            finish();
         }
     }
 
@@ -53,12 +59,9 @@ public class MainActivity extends AppCompatActivity {
                 .commit();
     }
 
-    @Override
-    public void onBackPressed() {
-        if (getBackStackCount() > 1) {
-            super.onBackPressed();
-        } else {
-            finish();
+    private void setStartFragment() {
+        if (getBackStackCount() == 0) {
+            replaceFragment(ProfileFragment.newInstance());
         }
     }
 

@@ -120,6 +120,8 @@ public class ProfileFragment extends Fragment {
     }
 
     private void onProfileLoaded(User user) {
-        tvFullName.setText(user.getFullName());
+        if (user != null) {
+            tvFullName.setText(user.getFullName());
+        }
     }
 }
