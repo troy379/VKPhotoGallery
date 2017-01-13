@@ -1,4 +1,4 @@
-package com.stfalcon.vkphotogallery.features.profile.photos.all;
+package com.stfalcon.vkphotogallery.features.profile.photos.all.ui;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -9,10 +9,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.stfalcon.vkphotogallery.Demo;
 import com.stfalcon.vkphotogallery.R;
-import com.stfalcon.vkphotogallery.common.model.Photo;
+import com.stfalcon.vkphotogallery.common.model.photos.Photo;
+import com.stfalcon.vkphotogallery.common.repo.Repo;
+import com.stfalcon.vkphotogallery.features.prefs.Preferences;
+import com.stfalcon.vkphotogallery.features.profile.photos.all.repo.IAllPhotosRepo;
+import com.stfalcon.vkphotogallery.features.profile.photos.all.repo.RetrofitAllPhotosRepo;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /*
@@ -22,6 +26,7 @@ public class AllPhotosFragment extends Fragment {
 
     private RecyclerView recyclerView;
     private AllPhotosAdapter adapter;
+    private IAllPhotosRepo allPhotosRepo = new RetrofitAllPhotosRepo();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -36,7 +41,20 @@ public class AllPhotosFragment extends Fragment {
     @Override
     public void onStart() {
         super.onStart();
-        onAlbumsLoaded(Demo.getPhotos());
+        allPhotosRepo.getAllPhotos(
+                Preferences.with(getActivity()).getUser(), 0,
+                new Repo.Result<ArrayList<Photo>>() {
+                    @Override
+                    public void response(ArrayList<Photo> photos) {
+                        onAlbumsLoaded(photos);
+                    }
+                }, new Repo.Result<Throwable>() {
+                    @Override
+                    public void response(Throwable throwable) {
+
+                    }
+                }
+        );
     }
 
     private void initRecycler() {

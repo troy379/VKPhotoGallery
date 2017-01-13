@@ -5,7 +5,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.stfalcon.vkphotogallery.features.profile.photos.albums.PhotoAlbumsFragment;
-import com.stfalcon.vkphotogallery.features.profile.photos.all.AllPhotosFragment;
+import com.stfalcon.vkphotogallery.features.profile.photos.all.ui.AllPhotosFragment;
 
 /*
  * Created by troy379 on 26.12.16.

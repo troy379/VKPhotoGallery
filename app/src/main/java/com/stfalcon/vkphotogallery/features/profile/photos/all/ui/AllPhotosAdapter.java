@@ -1,4 +1,4 @@
-package com.stfalcon.vkphotogallery.features.profile.photos.all;
+package com.stfalcon.vkphotogallery.features.profile.photos.all.ui;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.stfalcon.vkphotogallery.R;
-import com.stfalcon.vkphotogallery.common.model.Photo;
+import com.stfalcon.vkphotogallery.common.model.photos.Photo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +27,7 @@ public class AllPhotosAdapter extends RecyclerView.Adapter<AllPhotosAdapter.Phot
 
     @Override
     public void onBindViewHolder(PhotoViewHolder holder, int position) {
-        holder.sdvThumb.setImageURI(photoAlbums.get(position).getThumb());
+        holder.sdvThumb.setImageURI(photoAlbums.get(position).getLargestPhoto());
     }
 
     @Override
