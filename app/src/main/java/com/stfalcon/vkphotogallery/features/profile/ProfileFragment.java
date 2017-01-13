@@ -27,8 +27,6 @@ import com.stfalcon.vkphotogallery.utils.AppUtils;
  */
 public class ProfileFragment extends Fragment {
 
-    private Toolbar toolbar;
-
     private SimpleDraweeView sdvAvatar;
 
     private CounterView photosCounter;
@@ -58,8 +56,6 @@ public class ProfileFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        toolbar = (Toolbar) v.findViewById(R.id.toolbar);
-
         sdvAvatar = (SimpleDraweeView) v.findViewById(R.id.sdvAvatar);
 
         photosCounter = (CounterView) v.findViewById(R.id.photosCounter);
@@ -82,23 +78,9 @@ public class ProfileFragment extends Fragment {
     public void onStart() {
         super.onStart();
 
-        // FIXME: 21.12.16 demo data, remove after API implementation
-
-        toolbar.setTitle("D1TAYLOR");
-
-        sdvAvatar.setImageURI("http://cache.gawkerassets.com/assets/images/lifehacker/2011/10/1200-questioning.jpg");
-
         photosCounter.setTitle(R.string.profile_counter_title_photos);
-        photosCounter.setCount(1343);
-
         friendsCounter.setTitle(R.string.profile_counter_title_friends);
-        friendsCounter.setCount(10897);
-
         followersCounter.setTitle(R.string.profile_counter_title_followers);
-        followersCounter.setCount(620);
-
-        tvFullName.setText("Dave Taylor");
-        tvStatus.setText("www.askdavetaylor.com/");
 
         loadProfile();
     }
@@ -114,14 +96,20 @@ public class ProfileFragment extends Fragment {
                 }, new Repo.Result<Throwable>() {
                     @Override
                     public void response(Throwable throwable) {
-
+                        AppUtils.makeToast(getActivity(), "Error while loading user profile", false);
                     }
                 });
     }
 
     private void onProfileLoaded(User user) {
         if (user != null) {
+            sdvAvatar.setImageURI(user.getPhoto());
             tvFullName.setText(user.getFullName());
+            tvStatus.setText(user.getStatus());
+
+            photosCounter.setCount(user.getCounters().getPhotos());
+            friendsCounter.setCount(user.getCounters().getFriends());
+            followersCounter.setCount(user.getCounters().getFollowers());
         }
     }
 }

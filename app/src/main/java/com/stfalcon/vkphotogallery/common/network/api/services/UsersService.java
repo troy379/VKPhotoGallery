@@ -16,7 +16,7 @@ public interface UsersService {
     @GET("users.get")
     Call<UsersResponse> get(
             @Query("user_ids") long[] ids,
-            @Query("fields") Field[] fields,
+            @Query("fields[]") Field[] fields,
             @Query("name_case") NameCase nameCase
     );
 }

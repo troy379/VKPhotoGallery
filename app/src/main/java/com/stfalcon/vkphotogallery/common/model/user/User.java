@@ -53,7 +53,7 @@ public class User {
         return counters;
     }
 
-    private static class Counters {
+    public static class Counters {
 
         @SerializedName("albums")
         private int albums;

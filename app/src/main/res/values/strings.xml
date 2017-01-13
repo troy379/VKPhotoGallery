@@ -4,5 +4,6 @@
     <string name="profile_counter_title_photos">photos</string>
     <string name="profile_counter_title_friends">friends</string>
     <string name="profile_counter_title_followers">followers</string>
+    <string name="profile_title">Profile</string>
 
 </resources>
