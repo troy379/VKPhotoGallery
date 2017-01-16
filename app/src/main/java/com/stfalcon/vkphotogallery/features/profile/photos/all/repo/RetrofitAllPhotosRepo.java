@@ -1,22 +1,20 @@
 package com.stfalcon.vkphotogallery.features.profile.photos.all.repo;
 
 import com.stfalcon.vkphotogallery.common.model.photos.Photo;
+import com.stfalcon.vkphotogallery.common.model.reponses.errors.VkError;
 import com.stfalcon.vkphotogallery.common.model.reponses.photos.AllPhotosResponse;
 import com.stfalcon.vkphotogallery.common.network.api.client.VkClient;
 import com.stfalcon.vkphotogallery.common.network.api.services.PhotosService;
 import com.stfalcon.vkphotogallery.common.network.api.utils.BooleanInt;
 import com.stfalcon.vkphotogallery.common.repo.Repo;
+import com.stfalcon.vkphotogallery.common.repo.RetrofitRepo;
 
 import java.util.ArrayList;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /*
  * Created by troy379 on 13.01.17.
  */
-public class RetrofitAllPhotosRepo
+public class RetrofitAllPhotosRepo extends RetrofitRepo
         implements IAllPhotosRepo {
 
     private static final int PHOTOS_TO_LOAD = 200;
@@ -30,23 +28,18 @@ public class RetrofitAllPhotosRepo
     @Override
     public void getAllPhotos(long id, int offset,
                              final Repo.Result<ArrayList<Photo>> onSuccess,
-                             final Repo.Result<Throwable> onError) {
+                             final Repo.Result<VkError> onError) {
         photosService.getAll(
                 id,
                 BooleanInt.TRUE,
                 BooleanInt.TRUE,
                 offset,
                 PHOTOS_TO_LOAD
-        ).enqueue(new Callback<AllPhotosResponse>() {
+        ).enqueue(new VkCallback<>(new Result<AllPhotosResponse>() {
             @Override
-            public void onResponse(Call<AllPhotosResponse> call, Response<AllPhotosResponse> response) {
-                onSuccess.response(response.body().getResponse().getItems());
+            public void response(AllPhotosResponse allPhotosResponse) {
+                onSuccess.response(allPhotosResponse.getResponse().getItems());
             }
-
-            @Override
-            public void onFailure(Call<AllPhotosResponse> call, Throwable t) {
-                onError.response(t);
-            }
-        });
+        }, onError));
     }
 }

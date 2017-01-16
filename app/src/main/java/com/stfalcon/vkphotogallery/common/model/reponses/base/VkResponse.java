@@ -1,6 +1,7 @@
 package com.stfalcon.vkphotogallery.common.model.reponses.base;
 
 import com.google.gson.annotations.SerializedName;
+import com.stfalcon.vkphotogallery.common.model.reponses.errors.VkError;
 
 /*
  * Created by troy379 on 28.12.16.
@@ -11,17 +12,17 @@ public abstract class VkResponse<T> {
     private T response;
 
     @SerializedName("error")
-    private Error error;
+    private VkError error;
 
     public T getResponse() {
         return response;
     }
 
-    public boolean isSuccessfull() {
+    public boolean isSuccessful() {
         return error == null;
     }
 
-    public Error getError() {
+    public VkError getError() {
         return error;
     }
 }

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 public class UsersResponse extends VkResponse<ArrayList<User>> {
 
     public User getFirst() {
-        if (!getResponse().isEmpty()) {
+        if (isSuccessful() && !getResponse().isEmpty()) {
             return getResponse().get(0);
         } else return null;
     }

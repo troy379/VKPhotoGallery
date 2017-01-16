@@ -17,6 +17,7 @@ public class Preferences {
     private Context context;
 
     private static Preferences instance;
+
     public static Preferences with(Context context) {
         if (instance == null) instance = new Preferences(context);
         return instance;
@@ -35,7 +36,7 @@ public class Preferences {
     }
 
     /*
-    * TOKEN
+    * USER AUTH
     * */
     public String getAccessToken() {
         return getReader().getString(KEY_ACCESS_TOKEN, null);
@@ -45,14 +46,16 @@ public class Preferences {
         getEditor().putString(KEY_ACCESS_TOKEN, token).apply();
     }
 
-    /*
-    * USER ID
-    * */
     public void setUser(long userId) {
         getEditor().putLong(KEY_USER_ID, userId).apply();
     }
 
     public long getUser() {
         return getReader().getLong(KEY_USER_ID, 0);
+    }
+
+    public void clearAuthData() {
+        setAccessToken(null);
+        setUser(0);
     }
 }

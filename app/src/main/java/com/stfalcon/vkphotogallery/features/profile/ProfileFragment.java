@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
 import com.stfalcon.vkphotogallery.R;
+import com.stfalcon.vkphotogallery.common.model.reponses.errors.VkError;
 import com.stfalcon.vkphotogallery.common.model.user.User;
 import com.stfalcon.vkphotogallery.common.repo.Repo;
 import com.stfalcon.vkphotogallery.features.prefs.Preferences;
@@ -92,10 +93,10 @@ public class ProfileFragment extends Fragment {
                     public void response(User user) {
                         onProfileLoaded(user);
                     }
-                }, new Repo.Result<Throwable>() {
+                }, new Repo.Result<VkError>() {
                     @Override
-                    public void response(Throwable throwable) {
-                        AppUtils.makeToast(getActivity(), "Error while loading user profile", false);
+                    public void response(VkError error) {
+                        AppUtils.makeToast(getActivity(), error.getErrorMesssage(), false);
                     }
                 });
     }

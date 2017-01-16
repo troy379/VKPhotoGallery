@@ -11,10 +11,12 @@ import android.view.ViewGroup;
 
 import com.stfalcon.vkphotogallery.R;
 import com.stfalcon.vkphotogallery.common.model.photos.Photo;
+import com.stfalcon.vkphotogallery.common.model.reponses.errors.VkError;
 import com.stfalcon.vkphotogallery.common.repo.Repo;
 import com.stfalcon.vkphotogallery.features.prefs.Preferences;
 import com.stfalcon.vkphotogallery.features.profile.photos.all.repo.IAllPhotosRepo;
 import com.stfalcon.vkphotogallery.features.profile.photos.all.repo.RetrofitAllPhotosRepo;
+import com.stfalcon.vkphotogallery.utils.AppUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +32,7 @@ public class AllPhotosFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_photo_albums, container, false);
+        View v = inflater.inflate(R.layout.fragment_all_photos, container, false);
 
         this.recyclerView = (RecyclerView) v.findViewById(R.id.recyclerView);
         initRecycler();
@@ -48,10 +50,10 @@ public class AllPhotosFragment extends Fragment {
                     public void response(ArrayList<Photo> photos) {
                         onAlbumsLoaded(photos);
                     }
-                }, new Repo.Result<Throwable>() {
+                }, new Repo.Result<VkError>() {
                     @Override
-                    public void response(Throwable throwable) {
-
+                    public void response(VkError error) {
+                        AppUtils.makeToast(getActivity(), error.getErrorMesssage(), false);
                     }
                 }
         );

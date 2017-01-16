@@ -1,21 +1,18 @@
 package com.stfalcon.vkphotogallery.features.profile.repo;
 
+import com.stfalcon.vkphotogallery.common.model.reponses.errors.VkError;
 import com.stfalcon.vkphotogallery.common.model.reponses.user.UsersResponse;
 import com.stfalcon.vkphotogallery.common.model.user.Field;
 import com.stfalcon.vkphotogallery.common.model.user.NameCase;
 import com.stfalcon.vkphotogallery.common.model.user.User;
 import com.stfalcon.vkphotogallery.common.network.api.client.VkClient;
 import com.stfalcon.vkphotogallery.common.network.api.services.UsersService;
-import com.stfalcon.vkphotogallery.common.repo.Repo;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import com.stfalcon.vkphotogallery.common.repo.RetrofitRepo;
 
 /*
  * Created by troy379 on 11.01.17.
  */
-public class RetrofitProfileRepo extends Repo
+public class RetrofitProfileRepo extends RetrofitRepo
         implements IProfileRepo {
 
     private UsersService usersService;
@@ -25,7 +22,7 @@ public class RetrofitProfileRepo extends Repo
     }
 
     @Override
-    public void getProfile(long id, final Result<User> onSuccess, final Result<Throwable> onError) {
+    public void getProfile(long id, final Result<User> onSuccess, final Result<VkError> onError) {
         usersService.get(
                 new long[]{id},
                 new Field[]{
@@ -34,16 +31,11 @@ public class RetrofitProfileRepo extends Repo
                         Field.COUNTERS,
                 },
                 NameCase.NOMINATIVE)
-                .enqueue(new Callback<UsersResponse>() {
+                .enqueue(new VkCallback<>(new Result<UsersResponse>() {
                     @Override
-                    public void onResponse(Call<UsersResponse> call, Response<UsersResponse> response) {
-                        onSuccess.response(response.body().getFirst());
+                    public void response(UsersResponse usersResponse) {
+                        onSuccess.response(usersResponse.getFirst());
                     }
-
-                    @Override
-                    public void onFailure(Call<UsersResponse> call, Throwable t) {
-                        onError.response(t);
-                    }
-                });
+                }, onError));
     }
 }
