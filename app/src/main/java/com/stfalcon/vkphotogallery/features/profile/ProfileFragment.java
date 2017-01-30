@@ -5,7 +5,9 @@ import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
@@ -25,7 +27,11 @@ import com.stfalcon.vkphotogallery.utils.AppUtils;
 /*
  * Created by troy379 on 19.12.16.
  */
-public class ProfileFragment extends Fragment {
+public class ProfileFragment extends Fragment
+        implements Toolbar.OnMenuItemClickListener,
+        View.OnClickListener {
+
+    private Toolbar toolbar;
 
     private SimpleDraweeView sdvAvatar;
 
@@ -56,6 +62,10 @@ public class ProfileFragment extends Fragment {
 
         View v = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        toolbar = (Toolbar) v.findViewById(R.id.toolbar);
+        toolbar.inflateMenu(R.menu.profile_menu);
+        toolbar.setOnMenuItemClickListener(this);
+
         sdvAvatar = (SimpleDraweeView) v.findViewById(R.id.sdvAvatar);
 
         photosCounter = (CounterView) v.findViewById(R.id.photosCounter);
@@ -72,6 +82,22 @@ public class ProfileFragment extends Fragment {
         tabLayout.setupWithViewPager(viewPager);
 
         return v;
+    }
+
+    @Override
+    public void onClick(View view) {
+
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_search_by_location: {
+
+            }
+        }
+
+        return false;
     }
 
     @Override

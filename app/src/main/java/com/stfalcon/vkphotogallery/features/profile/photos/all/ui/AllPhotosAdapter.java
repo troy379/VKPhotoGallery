@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+import com.stfalcon.frescoimageviewer.ImageViewer;
 import com.stfalcon.vkphotogallery.R;
 import com.stfalcon.vkphotogallery.common.model.photos.Photo;
 
@@ -17,7 +18,7 @@ import java.util.List;
  */
 public class AllPhotosAdapter extends RecyclerView.Adapter<AllPhotosAdapter.PhotoViewHolder> {
 
-    private List<Photo> photoAlbums = new ArrayList<>();
+    private List<Photo> photos = new ArrayList<>();
 
     @Override
     public PhotoViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -27,20 +28,21 @@ public class AllPhotosAdapter extends RecyclerView.Adapter<AllPhotosAdapter.Phot
 
     @Override
     public void onBindViewHolder(PhotoViewHolder holder, int position) {
-        holder.sdvThumb.setImageURI(photoAlbums.get(position).getLargestPhoto());
+        holder.sdvThumb.setImageURI(photos.get(position).getLargestPhoto());
     }
 
     @Override
     public int getItemCount() {
-        return photoAlbums.size();
+        return photos.size();
     }
 
     public void add(List<Photo> albums) {
-        photoAlbums.addAll(albums);
+        photos.addAll(albums);
         notifyDataSetChanged();
     }
 
-    class PhotoViewHolder extends RecyclerView.ViewHolder {
+    class PhotoViewHolder extends RecyclerView.ViewHolder
+            implements View.OnClickListener {
 
         private SimpleDraweeView sdvThumb;
 
@@ -48,6 +50,19 @@ public class AllPhotosAdapter extends RecyclerView.Adapter<AllPhotosAdapter.Phot
             super(itemView);
 
             sdvThumb = (SimpleDraweeView) itemView.findViewById(R.id.sdvThumb);
+            sdvThumb.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            ArrayList<String> urls = new ArrayList<>();
+            for (Photo photo : photos) {
+                urls.add(photo.getLargestPhoto());
+            }
+
+            new ImageViewer.Builder(view.getContext(), urls)
+                    .setStartPosition(getAdapterPosition())
+                    .show();
         }
     }
 }
