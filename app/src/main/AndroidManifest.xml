@@ -11,6 +11,7 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".features.main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -18,7 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".features.auth.AuthActivity"/>
+        <activity
+            android:name=".features.auth.AuthActivity"/>
+        <activity
+            android:name=".features.places.autocomplete.PlacesAutocompleteActivity"/>
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDYyvEC3qb0KUxHax-YK5r1DYI7rntvIyg"/>
+
     </application>
 
 </manifest>
