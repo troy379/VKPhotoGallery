@@ -18,7 +18,7 @@ import com.stfalcon.vkphotogallery.R;
 import com.stfalcon.vkphotogallery.common.model.reponses.errors.VkError;
 import com.stfalcon.vkphotogallery.common.model.user.User;
 import com.stfalcon.vkphotogallery.common.repo.Repo;
-import com.stfalcon.vkphotogallery.features.places.autocomplete.PlacesAutocompleteActivity;
+import com.stfalcon.vkphotogallery.features.geo.nearme.PhotosNearMeActivity;
 import com.stfalcon.vkphotogallery.features.prefs.Preferences;
 import com.stfalcon.vkphotogallery.features.profile.counters.CounterView;
 import com.stfalcon.vkphotogallery.features.profile.photos.PhotosPagerAdapter;
@@ -95,7 +95,7 @@ public class ProfileFragment extends Fragment
     public boolean onMenuItemClick(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_search_by_location: {
-                startActivity(new Intent(getActivity(), PlacesAutocompleteActivity.class));
+                startActivity(new Intent(getActivity(), PhotosNearMeActivity.class));
             }
         }
 

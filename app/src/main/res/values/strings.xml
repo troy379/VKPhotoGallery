@@ -5,5 +5,7 @@
     <string name="profile_counter_title_friends">friends</string>
     <string name="profile_counter_title_followers">followers</string>
     <string name="profile_title">Profile</string>
+    <string name="search_by_my_location">Search by my location</string>
+    <string name="search_by_other_places">Search by other places</string>
 
 </resources>

@@ -1,0 +1,16 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+      xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/action_search_by_location"
+        android:icon="@drawable/ic_location_searching_white_24dp"
+        android:title="@string/search_by_my_location"
+        app:showAsAction="always"/>
+
+    <item
+        android:id="@+id/action_search_by_place"
+        android:icon="@drawable/ic_search_white_24dp"
+        android:title="@string/search_by_other_places"
+        app:showAsAction="always"/>
+
+</menu>

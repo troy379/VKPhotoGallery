@@ -23,6 +23,8 @@
             android:name=".features.auth.AuthActivity"/>
         <activity
             android:name=".features.places.autocomplete.PlacesAutocompleteActivity"/>
+        <activity
+            android:name="com.stfalcon.vkphotogallery.features.geo.nearme.PhotosNearMeActivity"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
